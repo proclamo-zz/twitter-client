@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4737f87f11e43d860e5ab7b0ba527a18",
-    "content-hash": "9ebf804d11f0251e1c15afb91d43f12c",
+    "hash": "66f9cc7fb1be255ba2cf4a3fc5e873dc",
+    "content-hash": "ca2fd84d625f066baadc3945d5b3ca63",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -466,6 +466,59 @@
                 "web service"
             ],
             "time": "2015-11-23 00:47:50"
+        },
+        {
+            "name": "guzzlehttp/oauth-subscriber",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/casperbakker/oauth-subscriber.git",
+                "reference": "8b4869b8bcbe23c655f6eb62b3825a94b90ad768"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/casperbakker/oauth-subscriber/zipball/8b4869b8bcbe23c655f6eb62b3825a94b90ad768",
+                "reference": "8b4869b8bcbe23c655f6eb62b3825a94b90ad768",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Subscriber\\Oauth\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle OAuth 1.0 subscriber",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "guzzle",
+                "oauth"
+            ],
+            "support": {
+                "source": "https://github.com/casperbakker/oauth-subscriber/tree/master"
+            },
+            "time": "2015-07-22 09:42:04"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1541,7 +1594,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "guzzlehttp/oauth-subscriber": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

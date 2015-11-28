@@ -6,6 +6,12 @@
     "autoload": {
         "psr-4": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:cbakker/oauth-subscriber.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.9",
         "symfony/symfony": "2.7.*",
@@ -13,7 +19,8 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "guzzlehttp/oauth-subscriber": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -1,9 +1,29 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
 
-services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+parameters:
+  class.guzzle.client: GuzzleHttp\Client
+  class.guzzle.stack: GuzzleHttp\HandlerStack
+  class.guzzle.oauthplugin: GuzzleHttp\Subscriber\Oauth\Oauth1
+  
+services:  
+  guzzle.twitter.client:
+    class: %class.guzzle.client%
+    arguments:
+      - {base_uri: %twitter.base_uri%, auth: 'oauth', handler: "@guzzle.twitter.client.stack"}
+
+  guzzle.twitter.client.stack:
+    class: %class.guzzle.stack%
+    factory: [%class.guzzle.stack%, create]
+    calls:
+      - [push, ["@guzzle.twitter.oauthplugin"]]
+
+  guzzle.twitter.oauthplugin:
+    class: %class.guzzle.oauthplugin%
+    arguments: [%twitter.config%]
+        
+  twitter.repository:
+    class: Infraestructure\GuzzleTwitterRepository
+    arguments: ["@guzzle.twitter.client"]
+    
+  twitter_service:
+    class: Application\TwitterService
+    arguments: ["@twitter.repository"]

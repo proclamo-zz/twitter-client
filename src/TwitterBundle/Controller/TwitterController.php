@@ -2,8 +2,9 @@
 
 namespace TwitterBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Application\UserNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,19 +14,32 @@ use Symfony\Component\HttpFoundation\Response;
 class TwitterController extends Controller
 {
     /**
-     * @Route("/{url}", name="tweets", defaults = {"url" = ""})
+     * @Route("/{username}", name="tweets", defaults = {"username" = ""})
      * @Method("GET")
      */
-    public function indexAction($url = "")
+    public function indexAction($username = "")
     {
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
         
-        $content = ["url" => $url];
-        
-        if (empty($url)) {
+        if (empty($username)) {
           $content = ["message" => "Username required"];
           $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+        }
+        else {
+          $twitter = $this->get('twitter_service');
+          
+          try {
+            $content = $twitter->getTweets($username);
+          }
+          catch (UserNotFoundException $ex) {
+            $content = ["message" => $ex->getMessage()];
+            $response->setStatusCode(UserNotFoundException::STATUS_CODE);
+          }
+          catch (\Exception $ex) {
+            $content = ["message" => $ex->getMessage()];
+            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+          }
         }
         
         $response->setContent(\json_encode($content));
