@@ -2,8 +2,8 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Tester\Exception\PendingException;
+use GuzzleHttp\Client;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -13,6 +13,9 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class FeatureContext implements Context, SnippetAcceptingContext
 {
+    private $client;
+    private $response;
+    
     /**
      * Initializes context.
      *
@@ -22,29 +25,32 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function __construct()
     {
+      $this->client = new Client();
     }
     
     /**
-     * @Given I request :arg1
+     * @Given I request :url
      */
-    public function iRequest($arg1)
+    public function iRequest($url)
     {
-        throw new PendingException();
+        $this->response = $this->client->get("http://127.0.0.1:8000" . $url, ["http_errors" => false]);
+        assertNotEmpty($this->response, "Service active");
     }
 
     /**
      * @Then the response should be JSON
      */
     public function theResponseShouldBeJson()
-    {
-        throw new PendingException();
+    {     
+        $data = \json_decode($this->response->getBody(true));
+        assertEquals(json_last_error(), JSON_ERROR_NONE, "Valid JSON");
     }
 
     /**
-     * @Then the response status code should be :arg1
+     * @Then the response status code should be :status
      */
-    public function theResponseStatusCodeShouldBe($arg1)
+    public function theResponseStatusCodeShouldBe($status)
     {
-        throw new PendingException();
+        assertEquals($status, $this->response->getStatusCode(), "Correct status");
     }
 }

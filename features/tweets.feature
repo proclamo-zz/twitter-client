@@ -6,7 +6,7 @@ Feature: Get last 10 tweets of a user
 Scenario: Ask for tweets with no user returns an error message
   Given I request "/tweets"
   Then the response should be JSON
-  And the response status code should be 500
+  And the response status code should be 400
   
 #Scenario: Ask for an inexistent user return a not found message
 #  Given I request "/tweets/this-user-is-sure-that-not-exists"
