@@ -12,6 +12,8 @@ After, run `composer.phar install`.
 Copy the configuration file `cp app/config/parameters.yml.dist app/config/parameters.yml` and edit `vim app/config/parameters.yml` 
 with apropiate values.
 
+Set the right permissions in [app folders](https://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup).
+
 After, run `php app/console server:start`.
 
 ## Usage
