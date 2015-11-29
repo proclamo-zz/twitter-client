@@ -15,7 +15,7 @@ class UserNotFoundException extends Exception {
   
   const STATUS_CODE = Response::HTTP_NOT_FOUND;
   
-  public function __construct($message, $code, $previous) {
-    parent::__construct($message, $code, $previous);
+  public function __construct(Exception $ex) {
+    parent::__construct($ex->getMessage(), $ex->getCode(), $ex->getPrevious());
   }
 }
