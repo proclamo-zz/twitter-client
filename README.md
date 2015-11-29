@@ -10,7 +10,7 @@ First, clone the repository `git clone https://github.com/proclamo/twitter-clien
 After, run `composer.phar install`.
 
 Copy the configuration file `cp app/config/parameters.yml.dist app/config/parameters.yml` and edit `vim app/config/parameters.yml` 
-with apropiate values.
+with apropiate values. For these values, you have to go to [https://apps.twitter.com/](https://apps.twitter.com/).
 
 Set the right permissions in [app folders](https://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup).
 
