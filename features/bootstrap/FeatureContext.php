@@ -53,4 +53,13 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         assertEquals($status, $this->response->getStatusCode(), "Correct status");
     }
+    
+    /**
+     * @Then I get :number tweets
+     */
+    public function iGetTweets($number)
+    {
+        $tweets = \json_decode($this->response->getBody());
+        assertEquals(\count($tweets->tweets), $number, "Correct number of tweets");
+    }
 }

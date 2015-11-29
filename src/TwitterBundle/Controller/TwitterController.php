@@ -32,13 +32,9 @@ class TwitterController extends Controller
           try {
             $content = $twitter->getTweets($username);
           }
-          catch (UserNotFoundException $ex) {
-            $content = ["message" => $ex->getMessage()];
-            $response->setStatusCode(UserNotFoundException::STATUS_CODE);
-          }
           catch (\Exception $ex) {
-            $content = ["message" => $ex->getMessage()];
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $content = ["message" => $ex->getMessage()];             
+            $response->setStatusCode($ex->getCode());
           }
         }
         

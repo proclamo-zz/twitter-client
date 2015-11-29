@@ -2,7 +2,9 @@
 
 namespace Infraestructure;
 
+use Domain\Exception\UserNotFoundException;
 use Domain\TwitterRepository;
+use Exception;
 use GuzzleHttp\Client;
 
 /**
@@ -21,8 +23,15 @@ class GuzzleTwitterRepository implements TwitterRepository {
     $this->client = $client;
   }
 
-  public function findByUsername($username, $limit = DEFAULT_TWEETS) {
-    return $this->client->get('statuses/user_timeline.json?screen_name=' . $username . '&count=' . $limit, ["http_errors" => true]);
+  public function findByUsername($username, $limit = "") {
+    if ($limit == "") {
+      $limit = self::DEFAULT_TWEETS;
+    }
+    
+    $json = $this->client->get('statuses/user_timeline.json?screen_name=' . $username . '&count=' . $limit, ["http_errors" => true]);    
+    
+    $response = \json_decode($json->getBody());    
+    return TwitterReconstitutionFactory::convert($response);
   }
 
 }
