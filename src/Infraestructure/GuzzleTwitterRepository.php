@@ -2,9 +2,7 @@
 
 namespace Infraestructure;
 
-use Domain\Exception\UserNotFoundException;
 use Domain\TwitterRepository;
-use Exception;
 use GuzzleHttp\Client;
 
 /**
@@ -14,6 +12,7 @@ use GuzzleHttp\Client;
  */
 class GuzzleTwitterRepository implements TwitterRepository {
   
+  // implementation details, they could be in a domain class
   const DEFAULT_TWEETS = 10;
   const MAX_TWEETS = 20;
   
@@ -23,9 +22,13 @@ class GuzzleTwitterRepository implements TwitterRepository {
     $this->client = $client;
   }
 
-  public function findByUsername($username, $limit = "") {
+  public function findByUsername($username, $limit) {
     if ($limit == "") {
       $limit = self::DEFAULT_TWEETS;
+    }
+    
+    if ($limit > self::MAX_TWEETS) {
+      $limit = self::MAX_TWEETS;
     }
     
     $json = $this->client->get('statuses/user_timeline.json?screen_name=' . $username . '&count=' . $limit, ["http_errors" => true]);    
