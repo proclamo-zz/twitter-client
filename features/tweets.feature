@@ -19,11 +19,11 @@ Scenario: Ask for a existent user returns the 10 last tweets
   And the response status code should be 200
   And I get 10 tweets
 
-#Scenario: Ask for a existent user and 12 tweets returns the 12 last tweets
-#  Given I request "/tweets/justinbieber?limit=12"
-#  Then the response should be JSON
-#  And the response status code should be 200
-#  And I get 12 tweets
+Scenario: Ask for a existent user and 12 tweets returns the 12 last tweets
+  Given I request "/tweets/justinbieber?limit=12"
+  Then the response should be JSON
+  And the response status code should be 200
+  And I get 12 tweets
 
 #Scenario: Ask for more tweets than the MAX_TWEETS returns MAX_TWEETS tweets
 #  Given I request "/twets/justinbieber?limit=100"

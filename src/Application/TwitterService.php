@@ -15,7 +15,7 @@ class TwitterService {
     $this->repository = $repository;
   }
   
-  public function getTweets($username, $limit = "") {
+  public function getTweets($username, $limit) {
     $tweets = $this->repository->findByUsername($username, $limit);
     return new TweetsJsonSerializer($tweets);
   }
