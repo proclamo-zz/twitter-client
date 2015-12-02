@@ -1,6 +1,6 @@
 <?php
 
-namespace Infraestructure;
+namespace Infrastructure;
 
 use Domain\Tweet;
 

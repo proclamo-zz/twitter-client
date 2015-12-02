@@ -20,7 +20,7 @@ services:
       arguments: [%twitter.config%]
         
   twitter.repository:
-    class: Infraestructure\GuzzleTwitterRepository
+    class: Infrastructure\GuzzleTwitterRepository
     arguments: ["@guzzle.twitter.client"]
     
   twitter_service:

@@ -1,6 +1,6 @@
 <?php
 
-namespace Infraestructure;
+namespace Infrastructure;
 
 use Domain\Exception\UserNotFoundException;
 use Domain\TwitterRepository;

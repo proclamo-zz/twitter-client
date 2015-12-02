@@ -3,7 +3,7 @@
 namespace Application;
 
 /**
- * TwitterService is an ApplicationService wich connects with Infraestructure layer 
+ * TwitterService is an ApplicationService wich connects with Infrastructure layer 
  *
  * @author cristianmartin
  */

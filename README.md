@@ -29,7 +29,7 @@ Domain Layer: src\Domain
 
 Application layer: src\Application
 
-Infrastructure layer: src\Infraestructure
+Infrastructure layer: src\Infrastructure
 
 Symfony integration: src\TwitterBundle
 
