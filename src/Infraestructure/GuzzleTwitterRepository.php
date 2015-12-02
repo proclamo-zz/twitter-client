@@ -34,7 +34,7 @@ class GuzzleTwitterRepository implements TwitterRepository {
     }
     
     try {
-      $json = $this->client->get('statuses/user_timeline.json?screen_name=' . $username . '&count=' . $limit, ["http_errors" => true]);
+      $json = $this->client->get('statuses/user_timeline.json?screen_name=' . $username . '&count=' . $limit)->getBody();       
     }
     catch(Exception $ex) {
       if ($ex->getCode() === 404) {
@@ -45,7 +45,7 @@ class GuzzleTwitterRepository implements TwitterRepository {
       }
     }
     
-    $response = \json_decode($json->getBody());    
+    $response = \json_decode($json);    
     return TwitterReconstitutionFactory::convert($response);
   }
 

@@ -2,8 +2,8 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use GuzzleHttp\Client;
+
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
@@ -31,8 +31,8 @@ class FeatureContext implements Context, SnippetAcceptingContext {
    * @Given I request :url
    */
   public function iRequest($url) {
-    $this->response = $this->client->get("http://127.0.0.1:8000" . $url, ["http_errors" => false]);
-    assertNotEmpty($this->response, "Service active");
+    $this->response = $this->client->get("http://127.0.0.1:8000" . $url, ["exceptions" => false]);
+    assertNotEmpty($this->response->getBody(), "Service active");
   }
 
   /**

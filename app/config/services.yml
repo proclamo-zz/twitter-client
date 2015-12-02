@@ -1,24 +1,23 @@
 
 parameters:
   class.guzzle.client: GuzzleHttp\Client
-  class.guzzle.stack: GuzzleHttp\HandlerStack
+  class.guzzle.emitter: GuzzleHttp\Event\Emitter
   class.guzzle.oauthplugin: GuzzleHttp\Subscriber\Oauth\Oauth1
-  
-services:  
-  guzzle.twitter.client:
-    class: %class.guzzle.client%
-    arguments:
-      - {base_uri: %twitter.base_uri%, auth: 'oauth', handler: "@guzzle.twitter.client.stack"}
+ 
+services:
+  guzzle.twitter.emitter:
+      class: %class.guzzle.emitter%
+      calls:
+          - [attach, [@guzzle.twitter.oauthplugin]]
 
-  guzzle.twitter.client.stack:
-    class: %class.guzzle.stack%
-    factory: [%class.guzzle.stack%, create]
-    calls:
-      - [push, ["@guzzle.twitter.oauthplugin"]]
+  guzzle.twitter.client:
+      class: %class.guzzle.client%
+      arguments:
+          - {base_url: [%twitter.base_url%, {version: %twitter.version%}], defaults: {auth: 'oauth'}, emitter: @guzzle.twitter.emitter}
 
   guzzle.twitter.oauthplugin:
-    class: %class.guzzle.oauthplugin%
-    arguments: [%twitter.config%]
+      class: %class.guzzle.oauthplugin%
+      arguments: [%twitter.config%]
         
   twitter.repository:
     class: Infraestructure\GuzzleTwitterRepository

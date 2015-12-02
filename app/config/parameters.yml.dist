@@ -1,9 +1,13 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
-    secret: YourSecretPassPhrase
-    twitter.base_uri: https://api.twitter.com/1.1
-    twitter.config:
-        consumer_key:
-        consumer_secret: 
-        token:
-        token_secret:
+  secret: YourSecretPass
+
+  twitter.base_url: "https://api.twitter.com/{version}/"
+  twitter.version: "1.1"
+
+  twitter.config:
+      consumer_key: ~
+      consumer_secret: ~
+      token: ~
+      token_secret: ~
+    
